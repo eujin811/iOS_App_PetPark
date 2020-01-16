@@ -38,10 +38,13 @@ class PensionCollectionViewCell: UICollectionViewCell {
         private func attribute() {
     //        pensionImageView.layer.cornerRadius = 30
             pensionAddress.textColor = .gray
+            pensionIntroduce.textColor = .darkGray
+            
+            pensionIntroduce.numberOfLines = 2
             
             pensionName.font = .boldSystemFont(ofSize: 18)
             pensionAddress.font = .italicSystemFont(ofSize: 13)
-            
+            pensionIntroduce.font = .systemFont(ofSize: 15, weight: .light)
         }
         
         private func setUpUI() {
@@ -72,13 +75,20 @@ class PensionCollectionViewCell: UICollectionViewCell {
             ])
             pensionAddress.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
-                pensionAddress.topAnchor.constraint(equalTo: pensionName.bottomAnchor, constant: padding),
+                pensionAddress.topAnchor.constraint(equalTo: pensionName.bottomAnchor),
                 pensionAddress.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
   
                 pensionAddress.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -(padding)),
-                pensionAddress.heightAnchor.constraint(equalToConstant: labelHeight)
+//                pensionAddress.heightAnchor.constraint(equalToConstant: labelHeight)
             ])
             
+            pensionIntroduce.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                pensionIntroduce.topAnchor.constraint(equalTo: pensionAddress.bottomAnchor),
+                pensionIntroduce.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
+                pensionIntroduce.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -(padding * 2)),
+                pensionIntroduce.heightAnchor.constraint(equalToConstant: labelHeight * 2)
+            ])
     //        likeButton.translatesAutoresizingMaskIntoConstraints = false
     //        NSLayoutConstraint.activate([
     //            likeButton.topAnchor.constraint(equalTo: pensionImageView.topAnchor, constant: padding),
@@ -86,6 +96,7 @@ class PensionCollectionViewCell: UICollectionViewCell {
     //            likeButton.widthAnchor.constraint(equalToConstant: labelHeight),
     //            likeButton.heightAnchor.constraint(equalToConstant: labelHeight)
     //        ])
+            
         }
         
         

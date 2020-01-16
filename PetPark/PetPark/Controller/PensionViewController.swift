@@ -97,13 +97,13 @@ extension PensionViewController: UICollectionViewDataSource {
                 pensionImage: pensionImage[0],
                 pensionName: pensionName,
                 pensionAddress: pensionAddress,
-                likeButtonImage: PensionCollectionViewCell.likeTrue)
+                likeButtonImage: PensionCollectionViewCell.likeTrue, pensionIndtroduce: "안녕하세요~~ 귀여운 멍멍이들 24마리와 놀러온 친구들까지 모두 모여 수영장 파티를 하는 귀요미 애견 펜션이에요!! 놀러온 친구들 모두 행복해 한답니다 ㅎㅎ")
         } else {
             cell.penseionItemSet(
                 pensionImage: pensionImage[1],
                 pensionName: pensionName,
                 pensionAddress: pensionAddress,
-                likeButtonImage: PensionCollectionViewCell.likeFalse)
+                likeButtonImage: PensionCollectionViewCell.likeFalse, pensionIndtroduce: "기본 요리도구 완비, 강아지 산책 준비물 완비, 기저귀 지급, 강아지들이 뛰어놀 잔디밭도 있어요 ㅎㅎ")
         }
         
         return cell
