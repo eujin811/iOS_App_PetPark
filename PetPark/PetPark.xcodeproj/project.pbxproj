@@ -29,6 +29,7 @@
 		6F0A360B23D0D019002269B3 /* CafeReViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A360A23D0D019002269B3 /* CafeReViewTableViewCell.swift */; };
 		6F0A360E23D0D685002269B3 /* PensionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A360D23D0D685002269B3 /* PensionCollectionViewCell.swift */; };
 		6F0A361023D0D714002269B3 /* PensionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0A360F23D0D714002269B3 /* PensionDetailViewController.swift */; };
+		967B201023D15C61006C5B55 /* CafeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967B200F23D15C61006C5B55 /* CafeDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		6F0A360A23D0D019002269B3 /* CafeReViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeReViewTableViewCell.swift; sourceTree = "<group>"; };
 		6F0A360D23D0D685002269B3 /* PensionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PensionCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F0A360F23D0D714002269B3 /* PensionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PensionDetailViewController.swift; sourceTree = "<group>"; };
+		967B200F23D15C61006C5B55 /* CafeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				6F0A360523D0CF99002269B3 /* CafeReviewViewController.swift */,
 				6F0A35F423D062B1002269B3 /* TestViewController.swift */,
 				6F0A360F23D0D714002269B3 /* PensionDetailViewController.swift */,
+				967B200F23D15C61006C5B55 /* CafeDetailViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				6F0A35C323CF547D002269B3 /* AppDelegate.swift in Sources */,
 				6F0A35FE23D0CE06002269B3 /* MyPageCafeTableViewCell.swift in Sources */,
 				6F0A35F723D0AD4B002269B3 /* PensionData.swift in Sources */,
+				967B201023D15C61006C5B55 /* CafeDetailViewController.swift in Sources */,
 				6F0A360623D0CF99002269B3 /* CafeReviewViewController.swift in Sources */,
 				6F0A360223D0CE52002269B3 /* MyPagePensionTableViewCell.swift in Sources */,
 				6F0A35DA23CF5513002269B3 /* MainTabBarController.swift in Sources */,
@@ -397,13 +401,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VR4RJ5PZHH;
+				DEVELOPMENT_TEAM = PCKUF577AL;
 				INFOPLIST_FILE = PetPark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kr.dukdamn.identifier;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.com.YoujinMac.PetPark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -415,13 +419,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VR4RJ5PZHH;
+				DEVELOPMENT_TEAM = PCKUF577AL;
 				INFOPLIST_FILE = PetPark/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = kr.dukdamn.identifier;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.com.YoujinMac.PetPark;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -87,12 +87,10 @@ extension CafeViewController: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let detailVC = TestViewController()
+    let cafeDetailVC = UINavigationController(rootViewController: CafeDetailViewController())
     
-//    detailVC.selectedIndexPath = indexPath
-    
-    //        detailVC.detailView.pizzaDisplayView.image = UIImage(named: menuData[indexPath.section].products[indexPath.row].name)
-    self.navigationController?.pushViewController(detailVC, animated: true)
+    cafeDetailVC.modalPresentationStyle = .fullScreen
+    present(cafeDetailVC, animated: true)
   }
 }
 

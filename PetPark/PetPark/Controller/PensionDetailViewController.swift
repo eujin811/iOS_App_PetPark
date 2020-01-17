@@ -11,7 +11,7 @@ import MapKit
 
 class PensionDetailViewController: UIViewController {
     
-    private var selectedIndexPath: IndexPath!
+    var selectedIndexPath: IndexPath!
     
     private let phoneImage = UIImageView()
     private let siteImage = UIImageView()
@@ -21,21 +21,28 @@ class PensionDetailViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let pensionImage = UIImageView()
     private let pensionNameLabel = UILabel()
-    private let pensionSite = UILabel()
-    private let pensionNum = UILabel()
+//    private let pensionSite = UILabel()
+//    private let pensionNum = UILabel()
+    private let pensionSiteButton = UIButton()
+    private let pensionNumButton = UIButton()
     private let pensionAddress = UILabel()
     private let pensionIntroduce = UILabel()
     
+    //후기
+    private let commentView = UIView()
+//    private
     
     
     private let mapView = MKMapView()
 //    let addressString = String()
     
+    let imageString = "pension1"
     let pensionName = "사랑가득 펜션"
     let addressString = "서울시 서초구"
     let siteString = "https://github.com/eujin811"
-    let numString = "02 - 000 - 0000"
+    let numString = "020000000"
     let introduceString = "안녕하세요~~ 귀여운 멍멍이들 24마리와 놀러온 친구들까지 모두 모여 수영장 파티를 하는 귀요미 애견 펜션이에요!! 놀러온 친구들 모두 행복해 한답니다 ㅎㅎ"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,27 +69,28 @@ class PensionDetailViewController: UIViewController {
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
         pensionImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            pensionImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: margin),
-            pensionImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: margin),
-            pensionImage.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor
+            pensionImage.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: margin),
+            pensionImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: margin),
+            pensionImage.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor
                 , constant: -margin),
-            pensionImage.heightAnchor.constraint(equalToConstant: viewWidth - (margin * 2 + viewWidth / 4))
+            pensionImage.widthAnchor.constraint(equalToConstant: viewWidth - (margin * 2)),
+            pensionImage.heightAnchor.constraint(equalToConstant: viewWidth - ((margin * 2) + (viewWidth / 4)))
             
         ])
         
         pensionNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             pensionNameLabel.topAnchor.constraint(equalTo: pensionImage.bottomAnchor, constant: padding),
-            pensionNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: margin + padding),
-            pensionNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
+            pensionNameLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: margin + padding),
+            pensionNameLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -margin),
         ])
         
         //
@@ -90,14 +98,14 @@ class PensionDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             introduceImage.heightAnchor.constraint(equalToConstant: miniImageLine),
             introduceImage.widthAnchor.constraint(equalToConstant: miniImageLine - 3),
-            introduceImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: miniImageMargin),
+            introduceImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: miniImageMargin),
             introduceImage.topAnchor.constraint(equalTo: pensionNameLabel.bottomAnchor, constant: margin)
         ])
         
         pensionIntroduce.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             pensionIntroduce.leadingAnchor.constraint(equalTo: introduceImage.trailingAnchor, constant: padding),
-            pensionIntroduce.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -(margin + padding)),
+            pensionIntroduce.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -(margin + padding)),
 //            pensionIntroduce.centerYAnchor.constraint(equalTo: introduceImage.centerYAnchor)
             pensionIntroduce.topAnchor.constraint(equalTo: introduceImage.topAnchor)
         ])
@@ -106,37 +114,37 @@ class PensionDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             phoneImage.heightAnchor.constraint(equalToConstant: miniImageLine),
             phoneImage.widthAnchor.constraint(equalToConstant: miniImageLine),
-            phoneImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: miniImageMargin),
+            phoneImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: miniImageMargin),
             phoneImage.topAnchor.constraint(equalTo: pensionIntroduce.bottomAnchor, constant: padding)
         ])
         
-        pensionNum.translatesAutoresizingMaskIntoConstraints = false
+        pensionNumButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            pensionNum.leadingAnchor.constraint(equalTo: phoneImage.trailingAnchor, constant: padding),
-            pensionNum.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
-            pensionNum.centerYAnchor.constraint(equalTo: phoneImage.centerYAnchor)
+            pensionNumButton.leadingAnchor.constraint(equalTo: phoneImage.trailingAnchor, constant: padding),
+            pensionNumButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -margin),
+            pensionNumButton.centerYAnchor.constraint(equalTo: phoneImage.centerYAnchor)
         ])
         
         siteImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             siteImage.heightAnchor.constraint(equalToConstant: miniImageLine),
             siteImage.widthAnchor.constraint(equalToConstant: miniImageLine),
-            siteImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: miniImageMargin),
+            siteImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: miniImageMargin),
             siteImage.topAnchor.constraint(equalTo: phoneImage.bottomAnchor, constant: padding)
         ])
         
-        pensionSite.translatesAutoresizingMaskIntoConstraints = false
+        pensionSiteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            pensionSite.leadingAnchor.constraint(equalTo: siteImage.trailingAnchor, constant: padding),
-            pensionSite.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
-            pensionSite.centerYAnchor.constraint(equalTo: siteImage.centerYAnchor)
+            pensionSiteButton.leadingAnchor.constraint(equalTo: siteImage.trailingAnchor, constant: padding),
+            pensionSiteButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -margin),
+            pensionSiteButton.centerYAnchor.constraint(equalTo: siteImage.centerYAnchor)
         ])
         
         mapImage.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mapImage.heightAnchor.constraint(equalToConstant: miniImageLine),
             mapImage.widthAnchor.constraint(equalToConstant: miniImageLine),
-            mapImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: miniImageMargin),
+            mapImage.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: miniImageMargin),
             mapImage.topAnchor.constraint(equalTo: siteImage.bottomAnchor, constant: margin)
         ])
         
@@ -144,18 +152,25 @@ class PensionDetailViewController: UIViewController {
         NSLayoutConstraint.activate([
             pensionAddress.centerYAnchor.constraint(equalTo: mapImage.centerYAnchor),
             pensionAddress.leadingAnchor.constraint(equalTo: mapImage.trailingAnchor, constant: padding),
-            pensionAddress.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
+            pensionAddress.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -margin),
         ])
         
         mapView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: pensionAddress.bottomAnchor, constant: padding),
-            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: margin + padding),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -(margin + padding)),
+            mapView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: margin + padding),
+            mapView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -(margin + padding)),
             mapView.heightAnchor.constraint(equalToConstant: viewWidth * (2/5))
         ])
         
-        
+        commentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            commentView.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: margin),
+            commentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: margin),
+            commentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -margin),
+            commentView.heightAnchor.constraint(equalToConstant: viewWidth - (margin * 2 + viewWidth / 4)),
+            commentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
     }
     
     // MARK: - attribute
@@ -175,7 +190,7 @@ class PensionDetailViewController: UIViewController {
         introduceImage.image = UIImage(systemName: "doc.text.fill")
         introduceImage.tintColor = .gray
                 
-        pensionImage.image = UIImage(named: "pension1")
+        pensionImage.image = UIImage(named: imageString)
         
         
         pensionNameLabel.font = .boldSystemFont(ofSize: 23)
@@ -187,26 +202,46 @@ class PensionDetailViewController: UIViewController {
         pensionAddress.textColor = .gray
         pensionAddress.text = addressString
         
-        pensionSite.textColor = .darkGray
-        pensionSite.text = siteString
         
-        pensionNum.text = numString
-        pensionNum.textColor = .darkGray
+        //pensionSite.textColor = .darkGray
+        //pensionSite.text = siteString
+        pensionSiteButton.setTitle(siteString, for: .normal)
+        pensionSiteButton.setTitleColor(.darkGray, for: .normal)
+        pensionSiteButton.contentHorizontalAlignment = .left
+        pensionSiteButton.addTarget(self, action: #selector(didTabSiteButton(_:)), for: .touchUpInside)
+        
+        // MARK: numString '-'추가
+        var num = Array(numString)
+        
+        num.insert(" ", at: 2)
+        num.insert("-", at: 2)
+        num.insert(" ", at: 2)
+        num.insert(" ", at: 8)
+        num.insert("-", at: 8)
+        num.insert(" ", at: 8)
+        pensionNumButton.setTitle(String(num), for: .normal)
+        pensionNumButton.setTitleColor(.darkGray, for: .normal)
+        pensionNumButton.contentHorizontalAlignment = .left
+        pensionNumButton.addTarget(self, action: #selector(didTabPhonNumButton(_:)), for: .touchUpInside)
+
         
         pensionIntroduce.text = introduceString
         pensionIntroduce.numberOfLines = 4
         
+        commentView.backgroundColor = .black
+        
         view.addSubview(scrollView)
-        view.addSubview(phoneImage)
-        view.addSubview(pensionImage)
-        view.addSubview(pensionNameLabel)
-        view.addSubview(pensionSite)
-        view.addSubview(pensionNum)
-        view.addSubview(pensionAddress)
-        view.addSubview(siteImage)
-        view.addSubview(mapImage)
-        view.addSubview(introduceImage)
-        view.addSubview(pensionIntroduce)
+        scrollView.addSubview(phoneImage)
+        scrollView.addSubview(pensionImage)
+        scrollView.addSubview(pensionNameLabel)
+        scrollView.addSubview(pensionSiteButton)
+        scrollView.addSubview(pensionNumButton)
+        scrollView.addSubview(pensionAddress)
+        scrollView.addSubview(siteImage)
+        scrollView.addSubview(mapImage)
+        scrollView.addSubview(introduceImage)
+        scrollView.addSubview(pensionIntroduce)
+        scrollView.addSubview(commentView)
         //        scrollView.backgroundColor = .green
         
     }
@@ -249,10 +284,27 @@ class PensionDetailViewController: UIViewController {
           mapView.setRegion(region, animated: true)
       }
     
+    // MARK: - @objc Button func
     @objc private func didTabBackButton(_ sender: Any) {
         //        dismiss(animated: true)
         print("didTabBackButton")
         dismiss(animated: true)
+    }
+    
+    @objc private func didTabPhonNumButton(_ sender: UIButton) {
+        print("pensionNumButton Click")
+
+        let numberURL = NSURL(string: "tel://" + numString)
+        UIApplication.shared.open(numberURL! as URL)
+//        UIApplication.shared.
+    }
+    
+    @objc private func didTabSiteButton(_ sender: UIButton) {
+        print("siteButton")
+        let url = URL(string: siteString)!
+        guard UIApplication.shared.canOpenURL(url) else { return }
+        UIApplication.shared.open(url)
+
     }
 }
 
