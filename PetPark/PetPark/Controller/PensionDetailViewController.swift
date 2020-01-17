@@ -29,9 +29,19 @@ class PensionDetailViewController: UIViewController {
     private let pensionIntroduce = UILabel()
     
     //후기
-    private let commentView = UIView()
-//    private
+    private let contentView = UIView()
+
+    //후기
+    private let contentLabel = UILabel()
+    private let contentCountText = UILabel()
+    private let contentGrade = UILabel()
+    private let contentCount = UILabel()
+    private let starImage = UIImageView()
     
+    private let contentUserImage = UIImageView()
+    private let contentUserNameLabel = UILabel()
+    private let contentInputDateLabel = UILabel()
+    private let contentLivewLabel = UILabel()
     
     private let mapView = MKMapView()
 //    let addressString = String()
@@ -43,6 +53,16 @@ class PensionDetailViewController: UIViewController {
     let numString = "020000000"
     let introduceString = "안녕하세요~~ 귀여운 멍멍이들 24마리와 놀러온 친구들까지 모두 모여 수영장 파티를 하는 귀요미 애견 펜션이에요!! 놀러온 친구들 모두 행복해 한답니다 ㅎㅎ"
     
+    
+    // MARK: 후기 데이터
+    let contentGradeString = "4.3"
+    let contentCountString = "14"
+    
+    let contentUserGradeString = "4"
+    let contentUserNameString = "아이유"
+    let contentUserImageString = "조커"
+    let contentInputDateString = "2019년 9월 12일"
+    let contentLivewString = "강아지들도 많고 귀여워요 ㅎㅎ 특히 골든리트리버 귀엽고 말도 잘듣고 최고최고 다음에 또 올꺼임 ㅎㅎ"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +85,8 @@ class PensionDetailViewController: UIViewController {
         let viewWidth = view.frame.width
         let miniImageLine:CGFloat = 20
         let miniImageMargin:CGFloat = margin + 5
+        
+        let starImageLine:CGFloat = 25
         
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -163,13 +185,86 @@ class PensionDetailViewController: UIViewController {
             mapView.heightAnchor.constraint(equalToConstant: viewWidth * (2/5))
         ])
         
-        commentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            commentView.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: margin),
-            commentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: margin),
-            commentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -margin),
-            commentView.heightAnchor.constraint(equalToConstant: viewWidth - (margin * 2 + viewWidth / 4)),
-            commentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            contentView.topAnchor.constraint(equalTo: mapView.bottomAnchor, constant: margin),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: margin),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -margin),
+            contentView.heightAnchor.constraint(equalToConstant: 300),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+        ])
+
+        // MARK: 후기 AutoLayout
+        contentLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            contentLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
+            //            contentLabel.widthAnchor.constraint(equalToConstant: margin * 10 ),
+            contentLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin),
+            contentLabel.heightAnchor.constraint(equalToConstant: margin)
+        ])
+        
+        starImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            starImage.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: padding),
+            starImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
+            starImage.widthAnchor.constraint(equalToConstant: starImageLine),
+            starImage.heightAnchor.constraint(equalToConstant: starImageLine),
+        ])
+        
+        contentGrade.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentGrade.centerYAnchor.constraint(equalTo: starImage.centerYAnchor),
+            contentGrade.leadingAnchor.constraint(equalTo: starImage.trailingAnchor, constant: padding),
+            contentGrade.widthAnchor.constraint(equalToConstant: margin * 2),
+            //            contentGrade.heightAnchor.constraint(equalToConstant: margin * 5),
+        ])
+        
+        contentCountText.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentCountText.centerYAnchor.constraint(equalTo: starImage.centerYAnchor),
+            contentCountText.leadingAnchor.constraint(equalTo: contentGrade.trailingAnchor, constant: margin),
+        ])
+        
+        contentCount.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentCount.centerYAnchor.constraint(equalTo: starImage.centerYAnchor),
+            contentCount.leadingAnchor.constraint(equalTo: contentCountText.trailingAnchor, constant: padding),
+            //            contentCount.widthAnchor.constraint(equalToConstant: margin * 6),
+            //            contentCount.heightAnchor.constraint(equalToConstant: margin * 5)
+        ])
+        
+        contentUserImage.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentUserImage.topAnchor.constraint(equalTo: starImage.bottomAnchor, constant: padding),
+            contentUserImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
+            contentUserImage.widthAnchor.constraint(equalToConstant: margin * 2),
+            contentUserImage.heightAnchor.constraint(equalToConstant: margin * 2),
+        ])
+        
+        contentUserNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentUserNameLabel.topAnchor.constraint(equalTo: contentUserImage.topAnchor),
+            contentUserNameLabel.leadingAnchor.constraint(equalTo: contentUserImage.trailingAnchor, constant: padding),
+            contentUserNameLabel.widthAnchor.constraint(equalToConstant: 100),
+            contentUserNameLabel.heightAnchor.constraint(equalToConstant: margin),
+        ])
+        
+        contentInputDateLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentInputDateLabel.topAnchor.constraint(equalTo: contentUserNameLabel.bottomAnchor),
+            contentInputDateLabel.leadingAnchor.constraint(equalTo: contentUserImage.trailingAnchor, constant: padding),
+            contentInputDateLabel.widthAnchor.constraint(equalToConstant: 130),
+            contentInputDateLabel.heightAnchor.constraint(equalToConstant: margin),
+        ])
+        
+        contentLivewLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            contentLivewLabel.topAnchor.constraint(equalTo: contentInputDateLabel.bottomAnchor),
+            contentLivewLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin),
+            contentLivewLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin ),
+            contentLivewLabel.heightAnchor.constraint(equalToConstant: 100),
+            //            contentLivewLabel.widthAnchor.constraint(equalToConstant: 200),
         ])
     }
     
@@ -228,7 +323,45 @@ class PensionDetailViewController: UIViewController {
         pensionIntroduce.text = introduceString
         pensionIntroduce.numberOfLines = 4
         
-        commentView.backgroundColor = .black
+        
+        contentView.backgroundColor = .white
+        // MARK: 후기 attribute
+        starImage.image = #imageLiteral(resourceName: "star")
+        
+        contentLabel.font = .systemFont(ofSize: 16, weight: .semibold)
+        contentLabel.text = "후 기"
+        
+        contentGrade.text =  contentGradeString
+        contentGrade.textColor = .darkGray
+        
+        contentCountText.text = "후기"
+        contentCountText.textColor = .darkGray
+        
+        contentCount.text = contentCountString + "개"
+        contentCount.textColor = .darkGray
+        
+        //        userStarImage.image = #imageLiteral(resourceName: "star")
+        
+        
+        
+        contentUserImage.image = UIImage(named: contentUserImageString)
+        contentUserImage.layer.cornerRadius = 30
+        contentUserImage.layer.masksToBounds = true
+        
+        contentLivewLabel.text = contentLivewString
+        contentLivewLabel.numberOfLines = 0
+        //        contentLivewLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        contentLivewLabel.textColor = .darkGray
+        
+        contentUserNameLabel.text = contentUserNameString
+        contentUserNameLabel.font = .systemFont(ofSize: 17, weight: .semibold)
+        contentUserNameLabel.textColor = .darkGray
+        
+        contentInputDateLabel.text = contentInputDateString
+        contentInputDateLabel.font = .systemFont(ofSize: 13, weight: .regular)
+        contentInputDateLabel.textColor = .gray
+        
+        //        contentUserGradeLabel.textColor = .darkGray
         
         view.addSubview(scrollView)
         scrollView.addSubview(phoneImage)
@@ -241,9 +374,17 @@ class PensionDetailViewController: UIViewController {
         scrollView.addSubview(mapImage)
         scrollView.addSubview(introduceImage)
         scrollView.addSubview(pensionIntroduce)
-        scrollView.addSubview(commentView)
+        scrollView.addSubview(contentView)
         //        scrollView.backgroundColor = .green
         
+        //후기 contentView에 addSubview
+        [contentLabel, contentGrade, contentCount, starImage, contentCountText].forEach {
+            self.contentView.addSubview($0)
+        }
+        
+        [contentUserImage, contentUserNameLabel, contentInputDateLabel, contentLivewLabel/*, contentUserGradeLabel, userStarImage*/].forEach {
+            self.contentView.addSubview($0)
+        }
     }
     
     // MARK: - 주소 -> 위경도 변환.
